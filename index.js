@@ -57,26 +57,6 @@ function getDataFromApi(cities, callback) {
   $.ajax(settings);
 }
 
-/*
-  function getDataFromApi(latitude, longitude, time, callback) {
-    // Build api url based on parameters
-    let completeUrl = `${WEATHER_SEARCH_URL}/${API_KEY}/${latitude},${longitude},${time}`;
-    
-    let settings = {
-      url: completeUrl,
-      data: {
-        exclude: 'currently,minutely,hourly,alerts,flags',
-      },
-      dataType: 'jsonp',
-      type: 'GET',
-      success: callback
-    };
-  
-    $.ajax(settings);
-  }
-  
-  */
-
 function displaySearchData(data, city, cities) {
   // display search navigation
   $("#results").append(
@@ -108,8 +88,7 @@ function displayItineraryForm(numberOfDays) {
   let itineraryFormContents = "";
   let autocompleteInputIds = [];
   for (let i = 0; i < numberOfDays; i++) {
-    itineraryFormContents = itineraryFormContents.concat(`<label for="city-autocomplete${i}">Day ${i +
-      1}</label>
+    itineraryFormContents = itineraryFormContents.concat(`<label for="city-autocomplete${i}" class="required">Day ${i+1}</label>
         <input type="text" id="city-autocomplete${i}" required>
         `);
     autocompleteInputIds.push(`city-autocomplete${i}`);

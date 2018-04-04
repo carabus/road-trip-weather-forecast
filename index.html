@@ -18,53 +18,38 @@
             <div class="row">
                 <div class="twelve columns">
                     <h1>Road Trip Weather Forecast</h1>
+                    <p>Weather forecast is powered by <a href="https://darksky.net/poweredby" target="_blank">Dark Sky</a></p>
                 </div>
             </div>
         </header>
-
-
 
         <main role="main">
             <div class="row">
                 <div class="five columns">
                     <form method="POST" action="/search1" class="city-search dates">
-                        <label for="startDate">Trip start date</label>
+                        <label for="startDate" class="required">Trip start date</label>
                         <input type="date" id="startDate" required>
-                        <label for="numberOfDays">Number of days</label>
+                        <label for="numberOfDays" class="required">Number of days</label>
                         <input type="text" id="numberOfDays" required>
                         <button type="submit" id="submit1">Go!</button>
-
                     </form>
 
                     <form method="POST" action="/search2" class="city-search itinerary invisible">
-
                         <div id="places"></div>
                         <button type="submit" id="submit2">Go!</button>
-
                     </form>
                 
-                    <button type="button" class="restart">Restart</button>
-                
+                    <button type="button" class="restart">Restart</button>            
                 </div>
 
-
                 <div class="seven columns">
-
-
                     <div id="map" style="height:400px">
                     </div>
 
-
                     <div id="results">
-
                     </div>
-
                 </div>
             </div>
-
-
-
-
         </main>
     </div>
 

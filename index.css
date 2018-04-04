@@ -85,3 +85,8 @@ body {
   font-weight: 600;
   border-radius: 5px;
 }
+
+.required::after {
+  content: "*";
+  color: red;
+}
