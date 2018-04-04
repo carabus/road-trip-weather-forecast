@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>repl.it</title>
+    <link href="index.css" rel="stylesheet" type="text/css" />
+    <link href="skeleton.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+    <div class="container">
+        <header role="banner">
+            <div class="row">
+                <div class="twelve columns">
+                    <h1>Road Trip Weather Forecast</h1>
+                </div>
+            </div>
+        </header>
+
+
+
+        <main role="main">
+            <div class="row">
+                <div class="five columns">
+                    <form method="POST" action="/search1" class="city-search dates">
+
+                        <label>Trip start date</label>
+                        <input type="date" id="startDate" required>
+                        <label>Number of days</label>
+                        <input type="text" id="numberOfDays" required>
+                        <input type="submit" id="submit1" value="Go!">
+
+                    </form>
+
+                    <form method="POST" action="/search2" class="city-search itinerary invisible">
+
+                        <div id="stops"></div>
+                        <button type="submit" id="submit2">Go!</button>
+
+                    </form>
+                </div>
+
+
+                <div class="seven columns">
+
+
+                    <div id="map" style="height:400px">
+                    </div>
+
+
+                    <div id="results">
+
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+        </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous">
+        </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC38d9kOXfxzY_NfE8DrVvTHA93KBLv0hc&libraries=places"></script>
+
+    <script src="index.js"></script>
+</body>
+
+</html>
