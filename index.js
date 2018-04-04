@@ -110,7 +110,7 @@ function displayItineraryForm(numberOfDays) {
   for (let i = 0; i < numberOfDays; i++) {
     itineraryFormContents = itineraryFormContents.concat(`<label for="city-autocomplete${i}">Day ${i +
       1}</label>
-        <input type="text" id="city-autocomplete${i}">
+        <input type="text" id="city-autocomplete${i}" required>
         `);
     autocompleteInputIds.push(`city-autocomplete${i}`);
   }
@@ -124,17 +124,17 @@ function displayItineraryForm(numberOfDays) {
 }
 
 function handleDatesComplete() {
-  $(".dates").on("click", "#submit1", function(event) {
+  $(".dates").submit(function(event) {
     event.preventDefault();
     disableForm("dates");
-    $(this).hide();
+    $(this).find('#submit1').hide();
     let numberOfDays = $("#numberOfDays").val();
     displayItineraryForm(numberOfDays);
   });
 }
 
 function handleItineraryComplete() {
-  $(".itinerary").on("click", "#submit2", function(event) {
+  $(".itinerary").submit(function(event) {
     event.preventDefault();
     // get location information from autocompleteInputIds
     const startDate = $("#startDate").val();

@@ -4,9 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>repl.it</title>
+    <title>Road trip weather forecast</title>
+    <!-- Normalize.css, a cross-browser reset file -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.css" rel="stylesheet">
     <link href="index.css" rel="stylesheet" type="text/css" />
-    <link href="skeleton.css" rel="stylesheet" type="text/css" />
+    <link href="skeleton-grid.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -27,11 +29,11 @@
                 <div class="five columns">
                     <form method="POST" action="/search1" class="city-search dates">
 
-                        <label>Trip start date</label>
+                        <label for="startDate">Trip start date</label>
                         <input type="date" id="startDate" required>
-                        <label>Number of days</label>
+                        <label for="numberOfDays">Number of days</label>
                         <input type="text" id="numberOfDays" required>
-                        <input type="submit" id="submit1" value="Go!">
+                        <button type="submit" id="submit1">Go!</button>
 
                     </form>
 
