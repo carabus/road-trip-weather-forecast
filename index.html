@@ -28,7 +28,6 @@
             <div class="row">
                 <div class="five columns">
                     <form method="POST" action="/search1" class="city-search dates">
-
                         <label for="startDate">Trip start date</label>
                         <input type="date" id="startDate" required>
                         <label for="numberOfDays">Number of days</label>
@@ -39,10 +38,13 @@
 
                     <form method="POST" action="/search2" class="city-search itinerary invisible">
 
-                        <div id="stops"></div>
+                        <div id="places"></div>
                         <button type="submit" id="submit2">Go!</button>
 
                     </form>
+                
+                    <button type="button" class="restart">Restart</button>
+                
                 </div>
 
 

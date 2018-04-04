@@ -115,12 +115,12 @@ function displayItineraryForm(numberOfDays) {
     autocompleteInputIds.push(`city-autocomplete${i}`);
   }
 
-  $("#stops").html(itineraryFormContents);
+  $("#places").html(itineraryFormContents);
   // init itinerary form with Google Maps autocomplete
   initAutocompletes(autocompleteInputIds);
 
   // and then show it
-  $(".itinerary").toggleClass("invisible");
+  $(".itinerary").show();
 }
 
 function handleDatesComplete() {
@@ -136,6 +136,7 @@ function handleDatesComplete() {
 function handleItineraryComplete() {
   $(".itinerary").submit(function(event) {
     event.preventDefault();
+    disableForm("itinerary");
     // get location information from autocompleteInputIds
     const startDate = $("#startDate").val();
 
@@ -187,10 +188,28 @@ function setLocationOnMap(place) {
   }
 }
 
+function handleRestart() {
+  $('.restart').click(function(event) {
+    // reset and enable dates form
+    resetForm('dates');
+    enableForm('dates')
+    // show submit button on dates form
+    $('#submit1').show();
+    // hide itinerary form
+    $('.itinerary').hide();
+    // clean place inputs from itinerary form
+    $('#places').empty();
+    // todo clean up markers on the map and set initial focus
+    // clean up weather data from table
+    $('#results').empty();
+  });
+}
+
 function processTrip() {
   initMap();
   handleDatesComplete();
   handleItineraryComplete();
+  handleRestart();
 }
 
 $(processTrip);
