@@ -3,9 +3,7 @@ const API_KEY = "58b9faa457bb82b97af590775731c37a";
 
 let autocompleteList = [];
 
-let markers = [];
-
-let APP_STATE = [];
+let infoWindows = [];
 
 var countries = {
   us: {
@@ -35,7 +33,6 @@ function resetForm(formClass) {
 }
 
 function getDataFromApi(cities, callback) {
-  debugger;
   const city = cities.shift();
   // Build api url based on parameters
   let completeUrl = `${WEATHER_SEARCH_URL}/${API_KEY}/${city.latitude},${
@@ -58,11 +55,20 @@ function getDataFromApi(cities, callback) {
 }
 
 function displaySearchData(data, city, cities) {
-  // display search navigation
-  $("#results").append(
-    `<p>${city.day}: ${city.name} ${data.daily.data[0].summary}, ${
-      data.daily.data[0].temperatureHigh
-    }, ${data.daily.data[0].temperatureLow}</p>`
+
+  const contentString = `<span class="icon">${data.daily.data[0].icon}</span>
+  <span class="temp-max">${data.daily.data[0].temperatureHigh}</span>
+  <span class="temp-min">${data.daily.data[0].temperatureLow}</span>`;
+  // show results on map
+  setWeatherOnMap(city.latitude, city.longitude, contentString);
+  
+  // display search results
+  $("#results-table").append(
+    `<tr>
+    <td>${city.day}</td>
+    <td>${city.name}</td>
+    <td>${contentString}</td>
+    </tr>`
   );
 
   if (cities.length > 0) {
@@ -119,11 +125,13 @@ function handleItineraryComplete() {
     // get location information from autocompleteInputIds
     const startDate = $("#startDate").val();
 
+    let apiRequests = [];
+
     autocompleteList.forEach(function(city, index) {
       // Place on a Map
-      setLocationOnMap(city.getPlace());
+      // setLocationOnMap(city.getPlace());
 
-      APP_STATE.push({
+      apiRequests.push({
         day: `Day ${index + 1}`,
         name: city.getPlace().formatted_address,
         latitude: city.getPlace().geometry.location.lat(),
@@ -132,10 +140,12 @@ function handleItineraryComplete() {
       });
     });
 
-    console.log(APP_STATE);
+    console.log(apiRequests);
+
+    $('#results').show();
 
     // send consecutive api requests
-    getDataFromApi(APP_STATE, displaySearchData);
+    getDataFromApi(apiRequests, displaySearchData);
   });
 }
 
@@ -156,15 +166,19 @@ function initMap() {
   });
 }
 
-function setLocationOnMap(place) {
-  if (place.geometry) {
-    let marker = new google.maps.Marker({
-      position: place.geometry.location,
-      map: map,
-      title: "Hello World!"
+function setWeatherOnMap(latitude, longitude, contentString) {
+    let infoWindow = new google.maps.InfoWindow({
+      content: contentString
     });
-    markers.push(marker);
-  }
+    infoWindow.setPosition({lat: latitude, lng: longitude});
+    infoWindow.open(map);
+    infoWindows.push(infoWindow);
+}
+
+function cleanUpMap() {
+  infoWindows.forEach(infoWindow => infoWindow.setMap(null));
+  map.setZoom(countries["us"].zoom);
+  map.setCenter(countries["us"].center);
 }
 
 function handleRestart() {
@@ -179,8 +193,10 @@ function handleRestart() {
     // clean place inputs from itinerary form
     $('#places').empty();
     // todo clean up markers on the map and set initial focus
+    cleanUpMap();
     // clean up weather data from table
-    $('#results').empty();
+    $('#results-table').empty();
+    $('#results').hide();
   });
 }
 

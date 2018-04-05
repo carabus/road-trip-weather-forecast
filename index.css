@@ -90,3 +90,21 @@ body {
   content: "*";
   color: red;
 }
+
+.icon {
+  padding: 5px;
+}
+
+.temp-max {
+  color: red;
+}
+
+.temp-max::after {
+  content: "|";
+  color: black;
+  margin-left: 7px;
+}
+
+.temp-min {
+  color: blue;
+}

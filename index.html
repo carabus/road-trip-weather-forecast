@@ -18,7 +18,9 @@
             <div class="row">
                 <div class="twelve columns">
                     <h1>Road Trip Weather Forecast</h1>
-                    <p>Weather forecast is powered by <a href="https://darksky.net/poweredby" target="_blank">Dark Sky</a></p>
+                    <p>Weather forecast is powered by
+                        <a href="https://darksky.net/poweredby" target="_blank">Dark Sky</a>
+                    </p>
                 </div>
             </div>
         </header>
@@ -38,15 +40,26 @@
                         <div id="places"></div>
                         <button type="submit" id="submit2">Go!</button>
                     </form>
-                
-                    <button type="button" class="restart">Restart</button>            
+
+                    <button type="button" class="restart">Restart</button>
                 </div>
 
                 <div class="seven columns">
                     <div id="map" style="height:400px">
                     </div>
 
-                    <div id="results">
+                    <div id="results" class="invisible">
+                        <table class="u-full-width">
+                            <thead>
+                                <tr>
+                                    <th>Day</th>
+                                    <th>Location</th>
+                                    <th>Weather Forecast</th>
+                                </tr>
+                            </thead>
+                            <tbody id="results-table">
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
