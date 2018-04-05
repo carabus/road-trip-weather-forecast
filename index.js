@@ -56,7 +56,7 @@ function getDataFromApi(cities, callback) {
 
 function displaySearchData(data, city, cities) {
 
-  const contentString = `<span class="icon">${data.daily.data[0].icon}</span>
+  const contentString = `<img class="icon" src="icons/${data.daily.data[0].icon}.png">
   <span class="temp-max">${data.daily.data[0].temperatureHigh}</span>
   <span class="temp-min">${data.daily.data[0].temperatureLow}</span>`;
   // show results on map
@@ -86,6 +86,9 @@ function initAutocompletes(autocompleteInputIds) {
       }
     );
     autocompleteList.push(autocomplete);
+
+    // prevent from submitting on Enter
+    preventAutocompleteSubmit(element);
   });
 }
 
@@ -195,7 +198,7 @@ function handleRestart() {
     $('.itinerary').hide();
     // clean place inputs from itinerary form
     $('#places').empty();
-    // todo clean up markers on the map and set initial focus
+    // clean up markers on the map and set initial focus
     cleanUpMap();
     // clean up weather data from table
     $('#results-table').empty();
@@ -203,7 +206,14 @@ function handleRestart() {
   });
 }
 
+function preventAutocompleteSubmit(autocompleteId) {
+  $(`#${autocompleteId}`).keydown(function (e) {
+    if (e.which == 13 && $('.pac-container:visible').length) return false;
+  });
+}
+
 function processTrip() {
+  preventAutocompleteSubmit();
   initMap();
   handleDatesComplete();
   handleItineraryComplete();
