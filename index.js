@@ -114,6 +114,11 @@ function handleDatesComplete() {
     disableForm("dates");
     $(this).find('#submit1').hide();
     let numberOfDays = $("#numberOfDays").val();
+    // if numberOfDays is too big - maximum of 10 location inputs will be displayed
+    if(Number(numberOfDays) > 10) {
+      numberOfDays=10;
+    }
+
     displayItineraryForm(numberOfDays);
   });
 }
@@ -128,8 +133,6 @@ function handleItineraryComplete() {
     let apiRequests = [];
 
     autocompleteList.forEach(function(city, index) {
-      // Place on a Map
-      // setLocationOnMap(city.getPlace());
 
       apiRequests.push({
         day: `Day ${index + 1}`,
