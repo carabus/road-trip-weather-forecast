@@ -1,8 +1,20 @@
-@font-face {
-  font-family: 'WeatherIcons';
-  src: url('fonts/WeatherIcons.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
+body {
+  font-family: 'Roboto', 'sans-serif';
+  font-size: 14px;
+  /*background-image: url('images/background.jpg');*/
+
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+        url('images/background.jpg');
+}
+
+
+
+h1 {
+  color: white;
+  font: bold 50px Raleway, Serif;
+  text-shadow: -3px 3px 0 black;
+  text-transform: uppercase;
 }
 
 .weather {
@@ -67,12 +79,15 @@ body {
   width: 100%;
   padding: 10px;
   margin-top: 10px;
-  background-color: mediumseagreen;
+  background-color: dodgerblue;
   color: white;
   border: none;
   font-size: 16px;
   font-weight: 600;
   border-radius: 5px;
+  text-transform: uppercase;
+  text-shadow: -1px 1px 0 black;
+  cursor: pointer;
 }
 
 .invisible {
@@ -93,12 +108,15 @@ body {
   margin-top: 10px;
   margin-left:auto;
   margin-right:auto;
-  background-color: mediumseagreen;
+  background-color: coral;
   color: white;
   border: none;
   font-size: 16px;
   font-weight: 600;
   border-radius: 5px;
+  text-transform: uppercase;
+  text-shadow: -1px 1px 0 black;  
+  cursor: pointer;
 }
 
 .required::after {

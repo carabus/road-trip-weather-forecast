@@ -169,6 +169,7 @@ function handleItineraryComplete() {
     console.log(apiRequests);
 
     $('#results').show();
+    $('#map').show();
 
     // send consecutive api requests
     getDataFromApi(apiRequests, displaySearchData);
@@ -218,6 +219,8 @@ function handleRestart() {
     $('.itinerary').hide();
     // clean place inputs from itinerary form
     $('#places').empty();
+    // hide map
+    $('#map').hide()    
     // clean up markers on the map and set initial focus
     cleanUpMap();
     // clean up weather data from table
