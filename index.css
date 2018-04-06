@@ -1,3 +1,18 @@
+@font-face {
+  font-family: 'WeatherIcons';
+  src: url('fonts/WeatherIcons.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.weather {
+  /*display:inline-block;
+  position: relative;
+  top: 5px;*/
+  font-family: 'WeatherIcons';
+  font-size:40px;
+}
+
 body {
   box-sizing: border-box;
   background-color: LIGHTSKYBLUE;
@@ -91,15 +106,7 @@ body {
   color: red;
 }
 
-.icon {
-  position: relative;
-  display: inline-block;
-  width: 22px;
-  height: 22px;
-  padding: 5px;
-  top: 7px;
-}
-
+/*
 .temp-max {
   color: red;
 }
@@ -118,4 +125,76 @@ body {
   content: "\2109";
   color:blue;
   margin-left: 5px;
+}
+
+.temp {
+  font-family: Sans-Serif; 
+}
+
+.temp::after {
+  content: "\2109";
+  font-family: Sans-Serif;  
+}
+
+.city {
+  font-family: Sans-Serif;
+  font-weight: bold;
+}
+
+.icon {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+}
+
+.icon-map {
+  box-sizing: border-box;
+  position:relative;
+  top: 10px;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+}
+
+.bold{
+  font-weight: bold;
+}*/
+
+.city{
+  font-size: 16px;
+  display: inline-block;
+  font-weight: bold;
+}
+
+.icon-map {
+  display: inline-block;
+  width: 20px;
+  height:20px;
+  background-size: 25px;
+}
+
+.icon {
+  width: 40px;
+  height:40px;
+}
+
+.high{
+  color:red;
+}
+
+.low{
+  color:blue;
+}
+
+.high::after,
+.low::after
+{
+  content: "\00B0";
+}
+
+.divider::after{
+  content: "|";
+  margin-right:5px;
+  margin-left:5px;
 }

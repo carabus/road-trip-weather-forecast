@@ -42,7 +42,7 @@ function getDataFromApi(cities, callback) {
   let settings = {
     url: completeUrl,
     data: {
-      exclude: "currently,minutely,hourly,alerts,flags"
+      exclude: "minutely,hourly,alerts,flags"
     },
     dataType: "jsonp",
     type: "GET",
@@ -56,23 +56,45 @@ function getDataFromApi(cities, callback) {
 
 function displaySearchData(data, city, cities) {
 
-  const contentString = `<img class="icon" src="icons/${data.daily.data[0].icon}.png">
-  <span class="temp-max">${data.daily.data[0].temperatureHigh}</span>
-  <span class="temp-min">${data.daily.data[0].temperatureLow}</span>`;
+  const weatherOnMapBlock = `
+  <div class="info-window-block">
+  <div>
+  <div class="city">${city.name}</div>
+  <div class="icon-map" style="background-image: url(icons/${data.daily.data[0].icon}.png)"></div>
+  </div>
+  <div class="temperature">
+  <span class="high">${Math.round(data.daily.data[0].temperatureHigh)}</span>
+  <span class="divider"></span>
+  <span class="low">${Math.round(data.daily.data[0].temperatureLow)}</span>
+  </div>
+  </div>
+  `;
+
   // show results on map
-  setWeatherOnMap(city.latitude, city.longitude, contentString);
+  setWeatherOnMap(city.latitude, city.longitude, weatherOnMapBlock);
   
   // display search results
   $("#results-table").append(
     `<tr>
     <td>${city.day}</td>
     <td>${city.name}</td>
-    <td>${contentString}</td>
+    <td><img class="icon" src="icons/${data.daily.data[0].icon}.png" alt="${data.daily.data[0].summary}"></td>
+    <td>
+    <div class="temperature">
+    <span class="high">${Math.round(data.daily.data[0].temperatureHigh)}</span>
+    <span class="divider"></span>
+    <span class="low">${Math.round(data.daily.data[0].temperatureLow)}</span>
+    </div>
+    <div class="summary">${data.daily.data[0].summary}</div>
+    </td>
     </tr>`
   );
 
   if (cities.length > 0) {
     getDataFromApi(cities, displaySearchData);
+  }
+  else {
+    zoomOnFirstLocation();
   }
 }
 
@@ -136,10 +158,9 @@ function handleItineraryComplete() {
     let apiRequests = [];
 
     autocompleteList.forEach(function(city, index) {
-
       apiRequests.push({
         day: `Day ${index + 1}`,
-        name: city.getPlace().formatted_address,
+        name: city.getPlace().name,
         latitude: city.getPlace().geometry.location.lat(),
         longitude: city.getPlace().geometry.location.lng(),
         time: calculateDate(startDate, index)
@@ -212,12 +233,24 @@ function preventAutocompleteSubmit(autocompleteId) {
   });
 }
 
+function handleHideHelpMessage(){
+  $("#hide-help-message").click(function(event) {
+    $("#help").hide();
+  })
+}
+
+function zoomOnFirstLocation(){
+  map.setZoom(4);
+  map.panTo(infoWindows[0].position);
+}
+
 function processTrip() {
   preventAutocompleteSubmit();
   initMap();
   handleDatesComplete();
   handleItineraryComplete();
   handleRestart();
+  handleHideHelpMessage();
 }
 
 $(processTrip);
