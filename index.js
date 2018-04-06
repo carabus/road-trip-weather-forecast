@@ -167,7 +167,7 @@ function handleItineraryComplete() {
     });
 
     console.log(apiRequests);
-
+    $('#help').hide();
     $('#results').show();
     $('#map').show();
 
