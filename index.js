@@ -56,17 +56,20 @@ function getDataFromApi(cities, callback) {
 
 function displaySearchData(data, city, cities) {
 
+  const temperatureBlock = `
+  <div class="temperature">
+  <span class="high">${Math.round(data.daily.data[0].temperatureHigh)}</span>
+  <span class="divider"></span>
+  <span class="low">${Math.round(data.daily.data[0].temperatureLow)}</span>
+  </div>`
+
   const weatherOnMapBlock = `
   <div class="info-window-block">
   <div>
   <div class="city">${city.name}</div>
   <div class="icon-map" style="background-image: url(icons/${data.daily.data[0].icon}.png)"></div>
   </div>
-  <div class="temperature">
-  <span class="high">${Math.round(data.daily.data[0].temperatureHigh)}</span>
-  <span class="divider"></span>
-  <span class="low">${Math.round(data.daily.data[0].temperatureLow)}</span>
-  </div>
+  ${temperatureBlock}
   </div>
   `;
 
@@ -80,11 +83,7 @@ function displaySearchData(data, city, cities) {
     <td>${city.name}</td>
     <td><img class="icon" src="icons/${data.daily.data[0].icon}.png" alt="${data.daily.data[0].summary}"></td>
     <td>
-    <div class="temperature">
-    <span class="high">${Math.round(data.daily.data[0].temperatureHigh)}</span>
-    <span class="divider"></span>
-    <span class="low">${Math.round(data.daily.data[0].temperatureLow)}</span>
-    </div>
+    ${temperatureBlock}
     <div class="summary">${data.daily.data[0].summary}</div>
     </td>
     </tr>`
@@ -159,7 +158,7 @@ function handleItineraryComplete() {
 
     autocompleteList.forEach(function(city, index) {
       apiRequests.push({
-        day: `Day ${index + 1}`,
+        day: `Day&nbsp;${index + 1}`,
         name: city.getPlace().name,
         latitude: city.getPlace().geometry.location.lat(),
         longitude: city.getPlace().geometry.location.lng(),
