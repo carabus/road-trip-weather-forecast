@@ -106,61 +106,6 @@ body {
   color: red;
 }
 
-/*
-.temp-max {
-  color: red;
-}
-
-.temp-max::after {
-  content: "\2109";
-  color:red;
-  margin-left: 5px;
-}
-
-.temp-min {
-  color: blue;
-}
-
-.temp-min::after {
-  content: "\2109";
-  color:blue;
-  margin-left: 5px;
-}
-
-.temp {
-  font-family: Sans-Serif; 
-}
-
-.temp::after {
-  content: "\2109";
-  font-family: Sans-Serif;  
-}
-
-.city {
-  font-family: Sans-Serif;
-  font-weight: bold;
-}
-
-.icon {
-  display: inline-block;
-  width: 40px;
-  height: 40px;
-}
-
-.icon-map {
-  box-sizing: border-box;
-  position:relative;
-  top: 10px;
-  display: inline-block;
-  width: 40px;
-  height: 40px;
-  padding: 0;
-}
-
-.bold{
-  font-weight: bold;
-}*/
-
 .city{
   font-size: 16px;
   display: inline-block;
