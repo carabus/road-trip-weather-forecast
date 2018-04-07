@@ -215,6 +215,8 @@ function handleRestart() {
     enableForm('dates')
     // show submit button on dates form
     $('#submit1').show();
+    //enable itinerary form
+    enableForm('itinerary')
     // hide itinerary form
     $('.itinerary').hide();
     // clean place inputs from itinerary form
@@ -226,17 +228,25 @@ function handleRestart() {
     // clean up weather data from table
     $('#results-table').empty();
     $('#results').hide();
+    // clean up 
+    autocompleteList = [];
+    infoWindows = [];
+    $('.pac-container').remove();
   });
 }
 
 function preventAutocompleteSubmit(autocompleteId) {
   $(`#${autocompleteId}`).keydown(function (e) {
-    if (e.which == 13 && $('.pac-container:visible').length) return false;
+    console.log($('.pac-container:visible').length);
+    if (e.which == 13) {
+      return false;
+    }
   });
-
+/*
   $(`#${autocompleteId}`).on({ 'touchstart' : function(e){
     if ($('.pac-container:visible').length) return false;
     } });
+    */
 }
 
 function handleHideHelpMessage(){
@@ -251,7 +261,6 @@ function zoomOnFirstLocation(){
 }
 
 function processTrip() {
-  preventAutocompleteSubmit();
   initMap();
   handleDatesComplete();
   handleItineraryComplete();
