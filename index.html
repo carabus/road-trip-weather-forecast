@@ -5,53 +5,59 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>Road trip weather forecast</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway|Lato:400,700,900|Roboto:400,700" rel="stylesheet">
     <!-- Normalize.css, a cross-browser reset file -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.css" rel="stylesheet">
     <link href="index.css" rel="stylesheet" type="text/css" />
     <link href="skeleton-grid.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
-
     <div class="container">
         <header role="banner">
             <div class="row">
                 <div class="twelve columns">
                     <h1>Road Trip Weather Forecast</h1>
-                    <div id="help">
-                        <p>This app is here to help you to get weather forecast for a journey with a complex route. Think Road Trip where you stay at a different location each day.</p>
-                        <p>Simply pick the start date of your journey and it's duration. Enter planned stops for each day of your journey and get weather for this particular stop on a given day.</p>
-                        <p>Note that this app currently restricts number of stops to the maximum of 10.</p>
-                        <p>Weather forecast is powered by <a href="https://darksky.net/poweredby" target="_blank">Dark Sky</a>. Dark Sky API provides 7-day weather forecast and historical data where forecast is not available.</p>
-                        <p>Click <a href="javascript:void(0)" id="hide-help-message">here</a> to hide this message.</p>
-                    </div>
-                    
                 </div>
             </div>
         </header>
 
         <main role="main">
             <div class="row">
+
                 <div class="five columns">
                     <form method="POST" action="/search1" class="city-search dates">
                         <label for="startDate" class="required">Trip start date</label>
                         <input type="date" id="startDate" required>
                         <label for="numberOfDays" class="required">Trip duration</label>
                         <input type="text" id="numberOfDays" required>
-                        <button type="submit" id="submit1">Go!</button>
+                        <button type="submit" id="submit1">Go</button>
                     </form>
 
                     <form method="POST" action="/search2" class="city-search itinerary invisible">
                         <div id="places"></div>
-                        <button type="submit" id="submit2">Go!</button>
+                        <button type="submit" id="submit2">Go</button>
                     </form>
 
-                    <button type="button" class="restart">Restart</button>
+                    <button type="button" class="restart">Start Again</button>
                 </div>
 
                 <div class="seven columns">
-                    <div id="map" style="height:400px">
+
+                    <div id="help">
+                        <div id="help-close">
+                            <a id="hide-help-message" href="javascript:void(0)">x</a>
+                        </div>
+                        <h2>How it works</h2>
+                        <p>This app is here to help you to get weather forecast for a journey with a complex route. Think Road
+                            Trip where you stay at a different location each day.</p>
+                        <p>Simply pick the start date of your journey and its duration. Enter planned stops for each day of
+                            your journey and get weather for this particular stop on a given day.</p>
+                        <p>Weather forecast is powered by
+                            <a href="https://darksky.net/poweredby" target="_blank">Dark Sky</a>.</p>
+                    </div>
+
+                    <div id="map" style="height:400px" class="invisible">
                     </div>
 
                     <div id="results" class="invisible">
@@ -61,7 +67,7 @@
                                     <th>Day</th>
                                     <th>Location</th>
                                     <th>&nbsp;</th>
-                                    <th>Weather Forecast</th>                                    
+                                    <th>Weather Forecast</th>
                                 </tr>
                             </thead>
                             <tbody id="results-table">

@@ -1,16 +1,35 @@
-@font-face {
-  font-family: 'WeatherIcons';
-  src: url('fonts/WeatherIcons.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
+body {
+  font-family: "Roboto", "sans-serif";
+  font-size: 14px;
+
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("images/background.jpg");
+
+  background-attachment: fixed;
+}
+
+h1 {
+  color: white;
+  font: bold 50px Raleway, Serif;
+  text-shadow: -3px 3px 0 black;
+  text-transform: uppercase;
+}
+
+h2 {
+  text-transform: uppercase;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+p {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  line-height: 1.5;
 }
 
 .weather {
-  /*display:inline-block;
-  position: relative;
-  top: 5px;*/
-  font-family: 'WeatherIcons';
-  font-size:40px;
+  font-family: "WeatherIcons";
+  font-size: 40px;
 }
 
 body {
@@ -25,6 +44,7 @@ body {
   margin-top: 20px;
   padding: 20px;
   font-size: 14px;
+  margin-bottom: 20px;
 }
 
 .itinerary {
@@ -67,12 +87,15 @@ body {
   width: 100%;
   padding: 10px;
   margin-top: 10px;
-  background-color: mediumseagreen;
+  background-color: dodgerblue;
   color: white;
   border: none;
   font-size: 16px;
   font-weight: 600;
   border-radius: 5px;
+  text-transform: uppercase;
+  text-shadow: -1px 1px 0 black;
+  cursor: pointer;
 }
 
 .invisible {
@@ -91,14 +114,18 @@ body {
   width: 90%;
   padding: 10px;
   margin-top: 10px;
-  margin-left:auto;
-  margin-right:auto;
-  background-color: mediumseagreen;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: coral;
   color: white;
   border: none;
   font-size: 16px;
   font-weight: 600;
   border-radius: 5px;
+  text-transform: uppercase;
+  text-shadow: -1px 1px 0 black;
+  cursor: pointer;
 }
 
 .required::after {
@@ -106,7 +133,7 @@ body {
   color: red;
 }
 
-.city{
+.city {
   font-size: 16px;
   display: inline-block;
   font-weight: bold;
@@ -115,31 +142,79 @@ body {
 .icon-map {
   display: inline-block;
   width: 20px;
-  height:20px;
+  height: 20px;
   background-size: 25px;
 }
 
 .icon {
   width: 40px;
-  height:40px;
+  height: 40px;
 }
 
-.high{
-  color:red;
+.high {
+  color: red;
 }
 
-.low{
-  color:blue;
+.low {
+  color: blue;
 }
 
 .high::after,
-.low::after
-{
+.low::after {
   content: "\00B0";
 }
 
-.divider::after{
+.divider::after {
   content: "|";
-  margin-right:5px;
-  margin-left:5px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+#help {
+  box-sizing: border-box;
+  width: 100%;
+  background-color: antiquewhite;
+  font-size: 16px;
+  padding: 10px 20px 20px 20px;
+  border-radius: 20px;
+}
+
+/*
+#help {
+  position:absolute;
+  right:0;
+  width: 50%;
+  background-color: antiquewhite;
+  font-size: 16px;
+  padding: 10px 20px 20px 20px;
+  border-radius: 20px;
+}
+
+@media only screen and (max-width: 550px) {
+
+  #help {
+    position:relative;
+    width: 90%;
+    margin-bottom: 4%;
+  }
+}
+*/
+
+#help-close {
+  width: 100%;
+  font-size: 16px;
+  text-align: right;
+}
+
+#help-close a {
+  text-decoration: none;
+  margin-left: 10px;
+  color: dimgray;
+}
+
+#help-close a:hover,
+#help-close a:focus,
+#help-close a:visited,
+#help-close a:active {
+  color: dimgray;
 }
