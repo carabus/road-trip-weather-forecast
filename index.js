@@ -233,6 +233,10 @@ function preventAutocompleteSubmit(autocompleteId) {
   $(`#${autocompleteId}`).keydown(function (e) {
     if (e.which == 13 && $('.pac-container:visible').length) return false;
   });
+
+  $(`#${autocompleteId}`).on({ 'touchstart' : function(e){
+    if ($('.pac-container:visible').length) return false;
+    } });
 }
 
 function handleHideHelpMessage(){
