@@ -27,6 +27,16 @@ p {
   line-height: 1.5;
 }
 
+fieldset {
+  border:0;
+}
+
+legend {
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: bold;
+}
+
 .weather {
   font-family: "WeatherIcons";
   font-size: 40px;
@@ -55,10 +65,6 @@ body {
   padding: 20px 20px 20px 20px;
 }
 
-.itinerary label:first-child {
-  margin-top: 0;
-}
-
 .city-search {
   box-sizing: border-box;
   width: 100%;
@@ -78,7 +84,7 @@ body {
 .city-search label {
   display: block;
   font-size: 14px;
-  color: gray;
+  color: dimgray;
   margin-top: 20px;
 }
 
@@ -90,7 +96,7 @@ body {
   background-color: dodgerblue;
   color: white;
   border: none;
-  font-size: 16px;
+  font-size: 19px;
   font-weight: 600;
   border-radius: 5px;
   text-transform: uppercase;
@@ -117,10 +123,10 @@ body {
   margin-bottom: 10px;
   margin-left: auto;
   margin-right: auto;
-  background-color: coral;
+  background-color:#FF5E24;
   color: white;
   border: none;
-  font-size: 16px;
+  font-size: 19px;
   font-weight: 600;
   border-radius: 5px;
   text-transform: uppercase;
