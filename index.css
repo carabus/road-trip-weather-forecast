@@ -48,7 +48,9 @@ body {
 .city-search button:disabled,
 .city-search button[disabled] {
   cursor: default; 
-  background-image: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2));
+  background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6));
+  color: white;
+  text-shadow: none;
 }
 
 #results {
