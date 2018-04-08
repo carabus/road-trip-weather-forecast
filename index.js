@@ -58,9 +58,9 @@ function displaySearchData(data, city, cities) {
 
   const temperatureBlock = `
   <div class="temperature">
-  <span class="high">${Math.round(data.daily.data[0].temperatureHigh)}</span>
+  <span class="high" aria-label="Daytime temperature">${Math.round(data.daily.data[0].temperatureHigh)}</span>
   <span class="divider"></span>
-  <span class="low">${Math.round(data.daily.data[0].temperatureLow)}</span>
+  <span class="low" aria-label="Nighttime temperature">${Math.round(data.daily.data[0].temperatureLow)}</span>
   </div>`
 
   const weatherOnMapBlock = `
