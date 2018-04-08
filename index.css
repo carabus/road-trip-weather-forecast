@@ -149,6 +149,13 @@ body {
   font-weight: bold;
 }
 
+.day {
+  display: inline-block;
+  position: relative;
+  bottom:1px;
+  margin-right: 5px;
+}
+
 .icon-map {
   display: inline-block;
   width: 20px;

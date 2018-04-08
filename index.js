@@ -5,6 +5,8 @@ let autocompleteList = [];
 
 let infoWindows = [];
 
+let infoWindowsContent = [];
+
 var countries = {
   us: {
     center: { lat: 37.1, lng: -95.7 },
@@ -55,33 +57,41 @@ function getDataFromApi(cities, callback) {
 }
 
 function displaySearchData(data, city, cities) {
-
   const temperatureBlock = `
   <div class="temperature">
-  <span class="high" aria-label="Daytime temperature">${Math.round(data.daily.data[0].temperatureHigh)}</span>
+  <span class="high" aria-label="Daytime temperature">${Math.round(
+    data.daily.data[0].temperatureHigh
+  )}</span>
   <span class="divider"></span>
-  <span class="low" aria-label="Nighttime temperature">${Math.round(data.daily.data[0].temperatureLow)}</span>
-  </div>`
+  <span class="low" aria-label="Nighttime temperature">${Math.round(
+    data.daily.data[0].temperatureLow
+  )}</span>
+  </div>`;
 
   const weatherOnMapBlock = `
   <div class="info-window-block">
   <div>
+  <div class="day">${city.day}</div>
   <div class="city">${city.name}</div>
-  <div class="icon-map" style="background-image: url(icons/${data.daily.data[0].icon}.png)"></div>
+  <div class="icon-map" style="background-image: url(icons/${
+    data.daily.data[0].icon
+  }.png)"></div>
   </div>
   ${temperatureBlock}
   </div>
   `;
 
-  // show results on map
-  setWeatherOnMap(city.latitude, city.longitude, weatherOnMapBlock);
-  
+  // generate info windows for showing on map
+  generateMapInfoWindows(city.latitude, city.longitude, weatherOnMapBlock);
+
   // display search results
   $("#results-table").append(
     `<tr>
     <td>${city.day}</td>
     <td>${city.name}</td>
-    <td><img class="icon" src="icons/${data.daily.data[0].icon}.png" alt="${data.daily.data[0].summary}"></td>
+    <td><img class="icon" src="icons/${data.daily.data[0].icon}.png" alt="${
+      data.daily.data[0].summary
+    }"></td>
     <td>
     ${temperatureBlock}
     <div class="summary">${data.daily.data[0].summary}</div>
@@ -91,10 +101,38 @@ function displaySearchData(data, city, cities) {
 
   if (cities.length > 0) {
     getDataFromApi(cities, displaySearchData);
-  }
-  else {
+  } else {
+    displayInfoWindows();
     zoomOnFirstLocation();
   }
+}
+
+function generateMapInfoWindows(latitude, longitude, weatherOnMapBlock) {
+  let infoWindowAtPosition = infoWindowsContent.find(function(element) {
+    return element.latitude === latitude && element.longitude === longitude;
+  });
+
+  debugger;
+  if (infoWindowAtPosition) {
+    infoWindowAtPosition.contentString += weatherOnMapBlock;
+  } else {
+    infoWindowsContent.push({
+      latitude,
+      longitude,
+      contentString: weatherOnMapBlock
+    });
+  }
+}
+
+function displayInfoWindows() {
+  infoWindowsContent.forEach(function(element){
+    let infoWindow = new google.maps.InfoWindow({
+      content: element.contentString
+    });
+    infoWindow.setPosition({ lat: element.latitude, lng: element.longitude });
+    infoWindow.open(map);
+    infoWindows.push(infoWindow);
+  })
 }
 
 function initAutocompletes(autocompleteInputIds) {
@@ -118,7 +156,8 @@ function displayItineraryForm(numberOfDays) {
   let itineraryFormContents = "";
   let autocompleteInputIds = [];
   for (let i = 0; i < numberOfDays; i++) {
-    itineraryFormContents = itineraryFormContents.concat(`<label for="city-autocomplete${i}" class="required">Day ${i+1}</label>
+    itineraryFormContents = itineraryFormContents.concat(`<label for="city-autocomplete${i}" class="required">Day ${i +
+      1}</label>
         <input type="text" id="city-autocomplete${i}" required>
         `);
     autocompleteInputIds.push(`city-autocomplete${i}`);
@@ -136,11 +175,13 @@ function handleDatesComplete() {
   $(".dates").submit(function(event) {
     event.preventDefault();
     disableForm("dates");
-    $(this).find('#submit1').hide();
+    $(this)
+      .find("#submit1")
+      .hide();
     let numberOfDays = $("#numberOfDays").val();
     // if numberOfDays is too big - maximum of 10 location inputs will be displayed
-    if(Number(numberOfDays) > 10) {
-      numberOfDays=10;
+    if (Number(numberOfDays) > 10) {
+      numberOfDays = 10;
     }
 
     displayItineraryForm(numberOfDays);
@@ -167,9 +208,9 @@ function handleItineraryComplete() {
     });
 
     console.log(apiRequests);
-    $('#help').hide();
-    $('#results').show();
-    $('#map').show();
+    $("#help").hide();
+    $("#results").show();
+    $("#map").show();
 
     // send consecutive api requests
     getDataFromApi(apiRequests, displaySearchData);
@@ -193,15 +234,6 @@ function initMap() {
   });
 }
 
-function setWeatherOnMap(latitude, longitude, contentString) {
-    let infoWindow = new google.maps.InfoWindow({
-      content: contentString
-    });
-    infoWindow.setPosition({lat: latitude, lng: longitude});
-    infoWindow.open(map);
-    infoWindows.push(infoWindow);
-}
-
 function cleanUpMap() {
   infoWindows.forEach(infoWindow => infoWindow.setMap(null));
   map.setZoom(countries["us"].zoom);
@@ -209,53 +241,54 @@ function cleanUpMap() {
 }
 
 function handleRestart() {
-  $('.restart').click(function(event) {
+  $(".restart").click(function(event) {
     // reset and enable dates form
-    resetForm('dates');
-    enableForm('dates')
+    resetForm("dates");
+    enableForm("dates");
     // show submit button on dates form
-    $('#submit1').show();
+    $("#submit1").show();
     //enable itinerary form
-    enableForm('itinerary')
+    enableForm("itinerary");
     // hide itinerary form
-    $('.itinerary').hide();
+    $(".itinerary").hide();
     // clean place inputs from itinerary form
-    $('#places').empty();
+    $("#places").empty();
     // hide map
-    $('#map').hide()    
+    $("#map").hide();
     // clean up markers on the map and set initial focus
     cleanUpMap();
     // clean up weather data from table
-    $('#results-table').empty();
-    $('#results').hide();
-    // clean up 
+    $("#results-table").empty();
+    $("#results").hide();
+    // clean up
     autocompleteList = [];
     infoWindows = [];
-    $('.pac-container').remove();
+    // clean up divs created by Places autocomplete
+    $(".pac-container").remove();
   });
 }
 
 function preventAutocompleteSubmit(autocompleteId) {
-  $(`#${autocompleteId}`).keydown(function (e) {
-    console.log($('.pac-container:visible').length);
+  $(`#${autocompleteId}`).keydown(function(e) {
+    console.log($(".pac-container:visible").length);
     if (e.which == 13) {
       return false;
     }
   });
-/*
+  /*
   $(`#${autocompleteId}`).on({ 'touchstart' : function(e){
     if ($('.pac-container:visible').length) return false;
     } });
     */
 }
 
-function handleHideHelpMessage(){
+function handleHideHelpMessage() {
   $("#hide-help-message").click(function(event) {
     $("#help").hide();
-  })
+  });
 }
 
-function zoomOnFirstLocation(){
+function zoomOnFirstLocation() {
   map.setZoom(4);
   map.panTo(infoWindows[0].position);
 }
