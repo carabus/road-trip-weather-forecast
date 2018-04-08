@@ -84,7 +84,7 @@ body {
 .city-search label {
   display: block;
   font-size: 14px;
-  color: gray;
+  color: dimgray;
   margin-top: 20px;
 }
 
@@ -96,7 +96,7 @@ body {
   background-color: dodgerblue;
   color: white;
   border: none;
-  font-size: 16px;
+  font-size: 19px;
   font-weight: 600;
   border-radius: 5px;
   text-transform: uppercase;
@@ -123,10 +123,10 @@ body {
   margin-bottom: 10px;
   margin-left: auto;
   margin-right: auto;
-  background-color: coral;
+  background-color:#FF5E24;
   color: white;
   border: none;
-  font-size: 16px;
+  font-size: 19px;
   font-weight: 600;
   border-radius: 5px;
   text-transform: uppercase;
