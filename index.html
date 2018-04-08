@@ -27,15 +27,21 @@
 
                 <div class="five columns">
                     <form method="POST" action="/search1" class="city-search dates">
-                        <label for="startDate" class="required">Trip start date</label>
-                        <input type="date" id="startDate" required>
-                        <label for="numberOfDays" class="required">Trip duration</label>
-                        <input type="text" id="numberOfDays" required>
+                        <fieldset>
+                            <legend>Trip start date and duration</legend>
+                            <label for="startDate" class="required">Trip start date</label>
+                            <input type="date" id="startDate" required>
+                            <label for="numberOfDays" class="required">Trip duration in days</label>
+                            <input type="text" id="numberOfDays" required>
+                        </fieldset>
                         <button type="submit" id="submit1">Go</button>
                     </form>
 
                     <form method="POST" action="/search2" class="city-search itinerary invisible">
-                        <div id="places"></div>
+                        <fieldset>
+                            <legend>Trip stops</legend>
+                            <div id="places"></div>
+                        </fieldset>
                         <button type="submit" id="submit2">Go</button>
                     </form>
 

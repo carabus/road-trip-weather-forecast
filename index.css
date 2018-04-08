@@ -27,6 +27,16 @@ p {
   line-height: 1.5;
 }
 
+fieldset {
+  border:0;
+}
+
+legend {
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: bold;
+}
+
 .weather {
   font-family: "WeatherIcons";
   font-size: 40px;
@@ -53,10 +63,6 @@ body {
 
 .dates {
   padding: 20px 20px 20px 20px;
-}
-
-.itinerary label:first-child {
-  margin-top: 0;
 }
 
 .city-search {
