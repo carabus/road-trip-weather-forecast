@@ -37,14 +37,18 @@ legend {
   font-weight: bold;
 }
 
-.weather {
-  font-family: "WeatherIcons";
-  font-size: 40px;
-}
-
 body {
   box-sizing: border-box;
-  background-color: LIGHTSKYBLUE;
+}
+
+.city-search input:disabled {
+  background: #dddddd;
+}
+
+.city-search button:disabled,
+.city-search button[disabled] {
+  cursor: default; 
+  background-image: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2));
 }
 
 #results {
@@ -136,7 +140,7 @@ body {
 
 .required::after {
   content: "*";
-  color: red;
+  color: #EB0000;
 }
 
 .city {
@@ -158,7 +162,7 @@ body {
 }
 
 .high {
-  color: red;
+  color:#EB0000;
 }
 
 .low {
