@@ -15,6 +15,17 @@ let countries = {
 };
 let map;
 
+$(processTrip);
+
+/** Inits Google Maps and handles all application events */
+function processTrip() {
+  initMap();
+  handleDatesComplete();
+  handleItineraryComplete();
+  handleRestart();
+  handleHideHelpMessage();
+}
+
 /** Disable form */
 function disableForm(formClass) {
   $(`.${formClass}`)
@@ -34,6 +45,11 @@ function resetForm(formClass) {
   $(`.${formClass}`)[0].reset();
 }
 
+/**
+ * Gets data from Dark Sky weather api
+ * @param {*} cities list of cities to get weather for
+ * @param {*} callback callback function
+ */
 function getDataFromApi(cities, callback) {
   const city = cities.shift();
   // Build api url based on parameters
@@ -57,6 +73,9 @@ function getDataFromApi(cities, callback) {
   $.ajax(settings);
 }
 
+/**
+ * Display general error message for the user if api call is unsuccessful
+ */
 function displayErrorMessage() {
   debugger;
   $("#error-result").text(
@@ -65,6 +84,12 @@ function displayErrorMessage() {
   $("#error-result").show();
 }
 
+/**
+ * Format and display information from weather API
+ * @param {*} data as returned by the API
+ * @param {*} city current city being processed
+ * @param {*} cities list of cities to get weather for
+ */
 function displaySearchData(data, city, cities) {
   const temperatureBlock = `
   <div class="temperature">
@@ -108,6 +133,7 @@ function displaySearchData(data, city, cities) {
     </tr>`
   );
 
+  // api calls are chained to execute synchronously in order.
   if (cities.length > 0) {
     getDataFromApi(cities, displaySearchData);
   } else {
@@ -115,8 +141,15 @@ function displaySearchData(data, city, cities) {
     zoomOnFirstLocation();
   }
 }
-
+/**
+ * Generate Google Maps info windows content without displaying them on the map
+ * @param {*} latitude latitude where info window will be displayed
+ * @param {*} longitude longitude where info window will be displayed
+ * @param {*} weatherOnMapBlock info window content
+ */
 function generateMapInfoWindows(latitude, longitude, weatherOnMapBlock) {
+  // If there already is info window at the same position - add content to it
+  // Otherwise, create new info window
   let infoWindowAtPosition = infoWindowsContent.find(function(element) {
     return element.latitude === latitude && element.longitude === longitude;
   });
@@ -132,6 +165,9 @@ function generateMapInfoWindows(latitude, longitude, weatherOnMapBlock) {
   }
 }
 
+/**
+ * Display info windows on Google Map
+ */
 function displayInfoWindows() {
   infoWindowsContent.forEach(function(element) {
     let infoWindow = new google.maps.InfoWindow({
@@ -143,6 +179,10 @@ function displayInfoWindows() {
   });
 }
 
+/**
+ * Initialise location inputs with Google Places autocompletes
+ * @param {*} autocompleteInputIds list of location inputs ids
+ */
 function initAutocompletes(autocompleteInputIds) {
   autocompleteInputIds.forEach(function(element) {
     autocomplete = new google.maps.places.Autocomplete(
@@ -159,6 +199,10 @@ function initAutocompletes(autocompleteInputIds) {
   });
 }
 
+/**
+ * Generate and display location inputs base on the trip duration entered by the user
+ * @param {*} duration
+ */
 function displayItineraryForm(duration) {
   // we need to populate itinerary form with numberOfDays number of inputs
   let itineraryFormContents = "";
@@ -180,6 +224,7 @@ function displayItineraryForm(duration) {
   $(".itinerary").show();
 }
 
+/** Handle submit of Trip Dates form */
 function handleDatesComplete() {
   $(".dates").submit(function(event) {
     event.preventDefault();
@@ -193,6 +238,7 @@ function handleDatesComplete() {
   });
 }
 
+/** Handle submit of Trip Itinerary form */
 function handleItineraryComplete() {
   $(".itinerary").submit(function(event) {
     event.preventDefault();
@@ -221,12 +267,18 @@ function handleItineraryComplete() {
   });
 }
 
+/**
+ * Calculate date for each day of the trip
+ * @param {*} startDate start date of the trip
+ * @param {*} index number of days to add
+ */
 function calculateDate(startDate, index) {
   const date = new Date(startDate);
   //getting seconds since Jan 1, 1970, 00:00:00.000 + index amount of days
   return Math.trunc(date.getTime() / 1000) + 60 * 60 * 24 * index;
 }
 
+/** initialize Google Maps widget */
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
     zoom: countries["us"].zoom,
@@ -238,12 +290,14 @@ function initMap() {
   });
 }
 
+/** remove info windows from map. revert map zoom to default */
 function cleanUpMap() {
   infoWindows.forEach(infoWindow => infoWindow.setMap(null));
   map.setZoom(countries["us"].zoom);
   map.setCenter(countries["us"].center);
 }
 
+/** app state clean up on pressing Restart button */
 function handleRestart() {
   $(".restart").click(function(event) {
     // reset and enable dates form
@@ -272,7 +326,10 @@ function handleRestart() {
     $(".pac-container").remove();
   });
 }
-
+/**
+ * Prevents form submit when user clicks Enter in autocomplete
+ * @param {*} autocompleteId autocomplete input id
+ */
 function preventAutocompleteSubmit(autocompleteId) {
   $(`#${autocompleteId}`).keydown(function(e) {
     if (e.which == 13) {
@@ -281,23 +338,15 @@ function preventAutocompleteSubmit(autocompleteId) {
   });
 }
 
+/** Hide application help message */
 function handleHideHelpMessage() {
   $("#hide-help-message").click(function(event) {
     $("#help").hide();
   });
 }
 
+/** Zoom map on first location of the trip */
 function zoomOnFirstLocation() {
   map.setZoom(4);
   map.panTo(infoWindows[0].position);
 }
-
-function processTrip() {
-  initMap();
-  handleDatesComplete();
-  handleItineraryComplete();
-  handleRestart();
-  handleHideHelpMessage();
-}
-
-$(processTrip);
