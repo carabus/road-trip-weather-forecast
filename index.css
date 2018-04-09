@@ -28,7 +28,7 @@ p {
 }
 
 fieldset {
-  border:0;
+  border: 0;
 }
 
 legend {
@@ -47,8 +47,11 @@ body {
 
 .city-search button:disabled,
 .city-search button[disabled] {
-  cursor: default; 
-  background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6));
+  cursor: default;
+  background-image: linear-gradient(
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0.6)
+  );
   color: white;
   text-shadow: none;
 }
@@ -129,7 +132,7 @@ body {
   margin-bottom: 10px;
   margin-left: auto;
   margin-right: auto;
-  background-color:#FF5E24;
+  background-color: #ff5e24;
   color: white;
   border: none;
   font-size: 19px;
@@ -142,7 +145,7 @@ body {
 
 .required::after {
   content: "*";
-  color: #EB0000;
+  color: #eb0000;
 }
 
 .city {
@@ -154,7 +157,7 @@ body {
 .day {
   display: inline-block;
   position: relative;
-  bottom:1px;
+  bottom: 1px;
   margin-right: 5px;
 }
 
@@ -171,7 +174,7 @@ body {
 }
 
 .high {
-  color:#EB0000;
+  color: #eb0000;
 }
 
 .low {
@@ -236,4 +239,11 @@ body {
 #help-close a:visited,
 #help-close a:active {
   color: dimgray;
+}
+
+.info {
+  background-color: #d9edf7;
+  padding: 10px;
+  line-height: 1.5;
+  border-radius: 5px;
 }

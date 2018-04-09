@@ -125,14 +125,14 @@ function generateMapInfoWindows(latitude, longitude, weatherOnMapBlock) {
 }
 
 function displayInfoWindows() {
-  infoWindowsContent.forEach(function(element){
+  infoWindowsContent.forEach(function(element) {
     let infoWindow = new google.maps.InfoWindow({
       content: element.contentString
     });
     infoWindow.setPosition({ lat: element.latitude, lng: element.longitude });
     infoWindow.open(map);
     infoWindows.push(infoWindow);
-  })
+  });
 }
 
 function initAutocompletes(autocompleteInputIds) {
@@ -152,18 +152,25 @@ function initAutocompletes(autocompleteInputIds) {
 }
 
 function displayItineraryForm(numberOfDays) {
+  let infoMessage = "";
+  // if numberOfDays is too big - maximum of 10 location inputs will be displayed
+  if (Number(numberOfDays) > 10) {
+    numberOfDays = 10;
+    infoMessage =
+      '<div class="info">Only up to 10 stops allowed. Displaying maximum of 10 stops.</div>';
+  }
   // we need to populate itinerary form with numberOfDays number of inputs
   let itineraryFormContents = "";
   let autocompleteInputIds = [];
   for (let i = 0; i < numberOfDays; i++) {
     itineraryFormContents = itineraryFormContents.concat(`<label for="city-autocomplete${i}" class="required">Day ${i +
       1}</label>
-        <input type="text" id="city-autocomplete${i}" required>
+        <input type="text" id="city-autocomplete${i}" required placeholder="Enter a US location">
         `);
     autocompleteInputIds.push(`city-autocomplete${i}`);
   }
 
-  $("#places").html(itineraryFormContents);
+  $("#places").html(infoMessage + itineraryFormContents);
   // init itinerary form with Google Maps autocomplete
   initAutocompletes(autocompleteInputIds);
 
@@ -179,10 +186,6 @@ function handleDatesComplete() {
       .find("#submit1")
       .hide();
     let numberOfDays = $("#numberOfDays").val();
-    // if numberOfDays is too big - maximum of 10 location inputs will be displayed
-    if (Number(numberOfDays) > 10) {
-      numberOfDays = 10;
-    }
 
     displayItineraryForm(numberOfDays);
   });
@@ -275,11 +278,6 @@ function preventAutocompleteSubmit(autocompleteId) {
       return false;
     }
   });
-  /*
-  $(`#${autocompleteId}`).on({ 'touchstart' : function(e){
-    if ($('.pac-container:visible').length) return false;
-    } });
-    */
 }
 
 function handleHideHelpMessage() {
