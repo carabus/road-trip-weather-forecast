@@ -1,3 +1,12 @@
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
 body {
   font-family: "Roboto", "sans-serif";
   font-size: 14px;
@@ -27,109 +36,11 @@ p {
   line-height: 1.5;
 }
 
-fieldset {
-  border: 0;
-}
-
-legend {
-  text-transform: uppercase;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-body {
-  box-sizing: border-box;
-}
-
-.city-search input:disabled {
-  background: #dddddd;
-}
-
-.city-search select:disabled {
-  background: #dddddd;
-}
-
-.city-search button:disabled,
-.city-search button[disabled] {
-  cursor: default;
-  background-image: linear-gradient(
-    rgba(255, 255, 255, 0.6),
-    rgba(255, 255, 255, 0.6)
-  );
-  color: white;
-  text-shadow: none;
-}
-
-#results {
-  box-sizing: border-box;
-  width: 100%;
-  background-color: white;
-  margin-top: 20px;
-  padding: 20px;
-  font-size: 14px;
-  margin-bottom: 20px;
-}
-
-.itinerary {
-  padding: 0 20px 20px 20px;
-}
-
-.dates {
-  padding: 20px 20px 20px 20px;
-}
-
-.city-search {
-  box-sizing: border-box;
-  width: 100%;
-  background-color: white;
-}
-
-.city-search input {
-  box-sizing: border-box;
-  display: block;
-  width: 100%;
-  font-size: 14px;
+.error-message {
+  background-color: mistyrose;
   padding: 10px;
-  border-radius: 5px;
-  margin-top: 10px;
-}
-
-.city-search select {
-  box-sizing: border-box;
-  display: block;
-  width: 100%;
-  font-size: 14px;
-  border-radius: 5px;
-  margin-top: 10px;
-  height: 40px;  
-  background-color: white;
-}
-
-.city-search option {
-  padding: 10px;
-}
-
-.city-search label {
-  display: block;
-  font-size: 14px;
-  color: dimgray;
-  margin-top: 20px;
-}
-
-.city-search button {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  background-color: dodgerblue;
-  color: white;
-  border: none;
-  font-size: 19px;
-  font-weight: 600;
-  border-radius: 5px;
-  text-transform: uppercase;
-  text-shadow: -1px 1px 0 black;
-  cursor: pointer;
+  line-height: 1.5;
+  border: solid red 1px;
 }
 
 .invisible {
@@ -137,13 +48,13 @@ body {
 }
 
 #map {
+  height: 400px;
   margin-top: 0;
   width: 100%;
   background-color: white;
 }
 
 .restart {
-  box-sizing: border-box;
   display: block;
   width: 90%;
   padding: 10px;
@@ -162,11 +73,100 @@ body {
   cursor: pointer;
 }
 
+/*
+* === Form Styles ===
+*/
+.base-form {
+  width: 100%;
+  background-color: white;
+}
+
+.base-form fieldset {
+  border: 0;
+}
+
+.base-form legend {
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.base-form label {
+  display: block;
+  font-size: 14px;
+  color: dimgray;
+  margin-top: 20px;
+}
+
+.base-form input {
+  display: block;
+  width: 100%;
+  font-size: 14px;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.base-form select {
+  display: block;
+  width: 100%;
+  font-size: 14px;
+  border-radius: 5px;
+  margin-top: 10px;
+  height: 40px;
+  background-color: white;
+}
+
+.base-form button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: dodgerblue;
+  color: white;
+  border: none;
+  font-size: 19px;
+  font-weight: 600;
+  border-radius: 5px;
+  text-transform: uppercase;
+  text-shadow: -1px 1px 0 black;
+  cursor: pointer;
+}
+
+/* Disabled inputs and buttons */
+.base-form input:disabled,
+.base-form select:disabled {
+  background: #dddddd;
+}
+
+.base-form button:disabled,
+.base-form button[disabled] {
+  cursor: default;
+  background-image: linear-gradient(
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0.6)
+  );
+  color: white;
+  text-shadow: none;
+}
+
+/* Additional form styling */
 .required::after {
   content: "*";
   color: #eb0000;
 }
 
+.itinerary {
+  padding: 0 20px 20px 20px;
+}
+
+.dates {
+  padding: 20px 20px 20px 20px;
+}
+
+/*
+* === WEATHER DISPLAY ===
+*/
 .city {
   font-size: 16px;
   display: inline-block;
@@ -211,6 +211,18 @@ body {
   margin-left: 5px;
 }
 
+#results {
+  width: 100%;
+  background-color: white;
+  margin-top: 20px;
+  padding: 20px;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/*
+* === HELP MESSAGE ===
+*/
 #help {
   box-sizing: border-box;
   width: 100%;
@@ -219,27 +231,6 @@ body {
   padding: 10px 20px 20px 20px;
   border-radius: 20px;
 }
-
-/*
-#help {
-  position:absolute;
-  right:0;
-  width: 50%;
-  background-color: antiquewhite;
-  font-size: 16px;
-  padding: 10px 20px 20px 20px;
-  border-radius: 20px;
-}
-
-@media only screen and (max-width: 550px) {
-
-  #help {
-    position:relative;
-    width: 90%;
-    margin-bottom: 4%;
-  }
-}
-*/
 
 #help-close {
   width: 100%;
@@ -258,11 +249,4 @@ body {
 #help-close a:visited,
 #help-close a:active {
   color: dimgray;
-}
-
-.error {
-  background-color: mistyrose;
-  padding: 10px;
-  line-height: 1.5;
-  border: solid red 1px; 
 }

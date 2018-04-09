@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>Road trip weather forecast</title>
-    <link href="https://fonts.googleapis.com/css?family=Raleway|Lato:400,700,900|Roboto:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway|Roboto:400,700" rel="stylesheet">
     <!-- Normalize.css, a cross-browser reset file -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.css" rel="stylesheet">
     <link href="index.css" rel="stylesheet" type="text/css" />
@@ -24,36 +24,35 @@
 
         <main role="main">
             <div class="row">
-
                 <div class="five columns">
-                    <form method="POST" action="/search1" class="city-search dates">
+                    <form method="POST" action="/process-dates" class="base-form dates">
                         <fieldset>
                             <legend>Trip start date and duration</legend>
                             <label for="startDate" class="required">Trip start date</label>
                             <input type="date" id="startDate" required placeholder="dd/mm/yyyy">
                             <label for="duration" class="required">Trip duration</label>
                             <select name="duration" id="duration" required>
-                                <option value="1">1 day</option> 
+                                <option value="1">1 day</option>
                                 <option value="2">2 days</option>
                                 <option value="3" selected>3 days</option>
-                                <option value="4">4 days</option> 
+                                <option value="4">4 days</option>
                                 <option value="5">5 days</option>
                                 <option value="6">6 days</option>
-                                <option value="7">7 days</option> 
+                                <option value="7">7 days</option>
                                 <option value="8">8 days</option>
-                                <option value="9">9 days</option> 
-                                <option value="10">10 days</option>                                                               
-                              </select>
+                                <option value="9">9 days</option>
+                                <option value="10">10 days</option>
+                            </select>
                         </fieldset>
-                        <button type="submit" id="submit1">Go</button>
+                        <button type="submit" id="submit-dates">Go</button>
                     </form>
 
-                    <form method="POST" action="/search2" class="city-search itinerary invisible">
+                    <form method="POST" action="/process-itinerary" class="base-form itinerary invisible">
                         <fieldset aria-live="assertive">
                             <legend>Trip stops</legend>
                             <div id="places"></div>
                         </fieldset>
-                        <button type="submit" id="submit2">Go</button>
+                        <button type="submit" id="submit-itinerary">Go</button>
                     </form>
 
                     <button type="button" class="restart">Start Again</button>
@@ -63,7 +62,7 @@
 
                     <div id="help">
                         <div id="help-close">
-                            <a id="hide-help-message" href="javascript:void(0)">x</a>
+                            <a id="hide-help-message" href="javascript:void(0)" aria-label="Hide help message">x</a>
                         </div>
                         <h2>How it works</h2>
                         <p>This app is here to help you to get weather forecast for a journey with a complex route. Think Road
@@ -73,12 +72,12 @@
                         <p>Weather forecast is powered by
                             <a href="https://darksky.net/poweredby" target="_blank">Dark Sky</a>.</p>
                     </div>
-                
-                    <div id="map" style="height:400px" class="invisible" aria-hidden="true">
+
+                    <div id="map" class="invisible" aria-hidden="true">
                     </div>
 
                     <div id="results" class="invisible" aria-live="assertive">
-                        <div id="error-result" class="error invisible"></div>
+                        <div id="error-message" class="error-message invisible"></div>
                         <table class="u-full-width">
                             <thead>
                                 <tr>
@@ -105,4 +104,5 @@
 
     <script src="index.js"></script>
 </body>
+
 </html>

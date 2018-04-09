@@ -78,10 +78,10 @@ function getDataFromApi(cities, callback) {
  */
 function displayErrorMessage() {
   debugger;
-  $("#error-result").text(
+  $("#error-message").text(
     "There was an error processing your request. Please try again."
   );
-  $("#error-result").show();
+  $("#error-message").show();
 }
 
 /**
@@ -230,7 +230,7 @@ function handleDatesComplete() {
     event.preventDefault();
     disableForm("dates");
     $(this)
-      .find("#submit1")
+      .find("#submit-dates")
       .hide();
     let duration = $("#duration").val();
 
@@ -304,7 +304,7 @@ function handleRestart() {
     resetForm("dates");
     enableForm("dates");
     // show submit button on dates form
-    $("#submit1").show();
+    $("#submit-dates").show();
     //enable itinerary form
     enableForm("itinerary");
     // hide itinerary form
@@ -318,7 +318,7 @@ function handleRestart() {
     // clean up weather data from table
     $("#results-table").empty();
     $("#results").hide();
-    $("#error-result").hide();
+    $("#error-message").hide();
     // clean up
     autocompleteList = [];
     infoWindows = [];
