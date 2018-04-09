@@ -31,8 +31,22 @@
                             <legend>Trip start date and duration</legend>
                             <label for="startDate" class="required">Trip start date</label>
                             <input type="date" id="startDate" required placeholder="dd/mm/yyyy">
+                            <!--
                             <label for="numberOfDays" class="required">Trip duration in days</label>
-                            <input type="text" id="numberOfDays" required>
+                            <input type="text" id="numberOfDays" required>-->
+                            <label for="duration" class="required">Trip duration</label>
+                            <select name="duration" id="duration" required>
+                                <option value="1">1 day</option> 
+                                <option value="2">2 days</option>
+                                <option value="3" selected>3 days</option>
+                                <option value="4">4 days</option> 
+                                <option value="5">5 days</option>
+                                <option value="6">6 days</option>
+                                <option value="7">7 days</option> 
+                                <option value="8">8 days</option>
+                                <option value="9">9 days</option> 
+                                <option value="10">10 days</option>                                                               
+                              </select>
                         </fieldset>
                         <button type="submit" id="submit1">Go</button>
                     </form>
@@ -67,6 +81,7 @@
                     </div>
 
                     <div id="results" class="invisible" aria-live="assertive">
+                        <div id="error-result" class="error invisible"></div>
                         <table class="u-full-width">
                             <thead>
                                 <tr>
@@ -93,5 +108,4 @@
 
     <script src="index.js"></script>
 </body>
-
 </html>

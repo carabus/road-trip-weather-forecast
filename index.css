@@ -45,6 +45,10 @@ body {
   background: #dddddd;
 }
 
+.city-search select:disabled {
+  background: #dddddd;
+}
+
 .city-search button:disabled,
 .city-search button[disabled] {
   cursor: default;
@@ -88,6 +92,21 @@ body {
   padding: 10px;
   border-radius: 5px;
   margin-top: 10px;
+}
+
+.city-search select {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  font-size: 14px;
+  border-radius: 5px;
+  margin-top: 10px;
+  height: 40px;  
+  background-color: white;
+}
+
+.city-search option {
+  padding: 10px;
 }
 
 .city-search label {
@@ -241,9 +260,9 @@ body {
   color: dimgray;
 }
 
-.info {
-  background-color: #d9edf7;
+.error {
+  background-color: mistyrose;
   padding: 10px;
   line-height: 1.5;
-  border-radius: 5px;
+  border: solid red 1px; 
 }

@@ -7,7 +7,7 @@ let infoWindows = [];
 
 let infoWindowsContent = [];
 
-var countries = {
+let countries = {
   us: {
     center: { lat: 37.1, lng: -95.7 },
     zoom: 3
@@ -18,14 +18,14 @@ let map;
 /** Disable form */
 function disableForm(formClass) {
   $(`.${formClass}`)
-    .find('input, button[type="submit"]')
+    .find('fieldset, button[type="submit"]')
     .attr("disabled", "disabled");
 }
 
 /** Enable form */
 function enableForm(formClass) {
   $(`.${formClass}`)
-    .find('input, button[type="submit"]')
+    .find('fieldset, button[type="submit"]')
     .removeAttr("disabled");
 }
 
@@ -50,10 +50,19 @@ function getDataFromApi(cities, callback) {
     type: "GET",
     success: function(response) {
       callback(response, city, cities);
-    }
+    },
+    error: displayErrorMessage
   };
 
   $.ajax(settings);
+}
+
+function displayErrorMessage() {
+  debugger;
+  $("#error-result").text(
+    "There was an error processing your request. Please try again."
+  );
+  $("#error-result").show();
 }
 
 function displaySearchData(data, city, cities) {
@@ -112,7 +121,6 @@ function generateMapInfoWindows(latitude, longitude, weatherOnMapBlock) {
     return element.latitude === latitude && element.longitude === longitude;
   });
 
-  debugger;
   if (infoWindowAtPosition) {
     infoWindowAtPosition.contentString += weatherOnMapBlock;
   } else {
@@ -151,18 +159,11 @@ function initAutocompletes(autocompleteInputIds) {
   });
 }
 
-function displayItineraryForm(numberOfDays) {
-  let infoMessage = "";
-  // if numberOfDays is too big - maximum of 10 location inputs will be displayed
-  if (Number(numberOfDays) > 10) {
-    numberOfDays = 10;
-    infoMessage =
-      '<div class="info">Only up to 10 stops allowed. Displaying maximum of 10 stops.</div>';
-  }
+function displayItineraryForm(duration) {
   // we need to populate itinerary form with numberOfDays number of inputs
   let itineraryFormContents = "";
   let autocompleteInputIds = [];
-  for (let i = 0; i < numberOfDays; i++) {
+  for (let i = 0; i < duration; i++) {
     itineraryFormContents = itineraryFormContents.concat(`<label for="city-autocomplete${i}" class="required">Day ${i +
       1}</label>
         <input type="text" id="city-autocomplete${i}" required placeholder="Enter a US location">
@@ -170,7 +171,8 @@ function displayItineraryForm(numberOfDays) {
     autocompleteInputIds.push(`city-autocomplete${i}`);
   }
 
-  $("#places").html(infoMessage + itineraryFormContents);
+  $("#places").html(itineraryFormContents);
+
   // init itinerary form with Google Maps autocomplete
   initAutocompletes(autocompleteInputIds);
 
@@ -185,9 +187,9 @@ function handleDatesComplete() {
     $(this)
       .find("#submit1")
       .hide();
-    let numberOfDays = $("#numberOfDays").val();
+    let duration = $("#duration").val();
 
-    displayItineraryForm(numberOfDays);
+    displayItineraryForm(duration);
   });
 }
 
@@ -195,11 +197,11 @@ function handleItineraryComplete() {
   $(".itinerary").submit(function(event) {
     event.preventDefault();
     disableForm("itinerary");
-    // get location information from autocompleteInputIds
+
     const startDate = $("#startDate").val();
 
     let apiRequests = [];
-
+    // get location information from autocompleteInputIds
     autocompleteList.forEach(function(city, index) {
       apiRequests.push({
         day: `Day&nbsp;${index + 1}`,
@@ -210,7 +212,6 @@ function handleItineraryComplete() {
       });
     });
 
-    console.log(apiRequests);
     $("#help").hide();
     $("#results").show();
     $("#map").show();
@@ -263,6 +264,7 @@ function handleRestart() {
     // clean up weather data from table
     $("#results-table").empty();
     $("#results").hide();
+    $("#error-result").hide();
     // clean up
     autocompleteList = [];
     infoWindows = [];
@@ -273,7 +275,6 @@ function handleRestart() {
 
 function preventAutocompleteSubmit(autocompleteId) {
   $(`#${autocompleteId}`).keydown(function(e) {
-    console.log($(".pac-container:visible").length);
     if (e.which == 13) {
       return false;
     }
