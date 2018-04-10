@@ -54,14 +54,19 @@ p {
   background-color: white;
 }
 
+.restart-container {
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+}
 .restart {
   display: block;
-  width: 90%;
+  width: 100%;
   padding: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 0;
+  margin-right: 0;
   background-color: #ff5e24;
   color: white;
   border: none;
@@ -82,8 +87,11 @@ p {
 }
 
 .base-form fieldset {
+  width: 100%;
   border: 0;
   padding: 0;
+  margin: 0;
+  min-width: unset;
 }
 
 .base-form legend {
@@ -224,13 +232,22 @@ p {
 /*
 * === HELP MESSAGE ===
 */
+@media only screen and (min-width: 550px) {
+  #help {
+    position: absolute;
+    width: 56.6666666667%;
+    left: 39.3333333333%;
+    margin-left: 4%;
+  }
+}
+
 #help {
-  box-sizing: border-box;
-  width: 100%;
+  /*width: 100%;*/
   background-color: antiquewhite;
   font-size: 16px;
   padding: 10px 20px 20px 20px;
   border-radius: 20px;
+  margin-bottom: 20px;
 }
 
 #help-close {

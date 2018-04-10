@@ -25,6 +25,19 @@
         <main role="main">
             <div class="row">
                 <div class="five columns">
+                    <div id="help">
+                        <div id="help-close">
+                            <a id="hide-help-message" href="javascript:void(0)" aria-label="Hide help message">x</a>
+                        </div>
+                        <h2>How it works</h2>
+                        <p>This app helps you to get weather forecast for a journey with a complex route. Think Road Trip where
+                            you stay at a different location each day.</p>
+                        <p>Simply pick the start date of your journey and its duration. Enter planned stops for each day of
+                            your journey and get weather for this particular stop on a given day.</p>
+                        <p>Weather forecast is powered by
+                            <a href="https://darksky.net/poweredby" target="_blank">Dark Sky</a>.</p>
+                    </div>
+
                     <form method="POST" action="/process-dates" class="base-form dates">
                         <fieldset>
                             <legend>Trip start date and duration</legend>
@@ -54,25 +67,13 @@
                         </fieldset>
                         <button type="submit" id="submit-itinerary">Go</button>
                     </form>
+                    <div class="restart-container">
+                        <button type="button" class="restart">Start Again</button>
+                    </div>
 
-                    <button type="button" class="restart">Start Again</button>
                 </div>
 
                 <div class="seven columns">
-
-                    <div id="help">
-                        <div id="help-close">
-                            <a id="hide-help-message" href="javascript:void(0)" aria-label="Hide help message">x</a>
-                        </div>
-                        <h2>How it works</h2>
-                        <p>This app helps you to get weather forecast for a journey with a complex route. Think Road
-                            Trip where you stay at a different location each day.</p>
-                        <p>Simply pick the start date of your journey and its duration. Enter planned stops for each day of
-                            your journey and get weather for this particular stop on a given day.</p>
-                        <p>Weather forecast is powered by
-                            <a href="https://darksky.net/poweredby" target="_blank">Dark Sky</a>.</p>
-                    </div>
-
                     <div id="map" class="invisible" aria-hidden="true">
                     </div>
 
