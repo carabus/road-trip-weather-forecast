@@ -77,7 +77,6 @@ function getDataFromApi(cities, callback) {
  * Display general error message for the user if api call is unsuccessful
  */
 function displayErrorMessage() {
-  debugger;
   $("#error-message").text(
     "There was an error processing your request. Please try again."
   );
