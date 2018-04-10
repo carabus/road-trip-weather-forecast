@@ -83,6 +83,7 @@ p {
 
 .base-form fieldset {
   border: 0;
+  padding: 0;
 }
 
 .base-form legend {
