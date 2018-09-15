@@ -232,7 +232,7 @@ p {
 /*
 * === HELP MESSAGE ===
 */
-@media only screen and (min-width: 550px) {
+@media only screen and (min-width: 650px) {
   #help {
     position: absolute;
     width: 56.6666666667%;
